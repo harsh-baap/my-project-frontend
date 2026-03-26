@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TEAM TITANS - AI</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #020617, #020b1f, #030d2b);
+        color: white;
+        overflow: hidden;
+      }
+
+      /* 🌠 PARTICLES */
+      canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      /* HEADER */
+      header {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 40px;
+      }
+
+      .logo {
+        font-family: "Orbitron";
+        font-size: 22px;
+        color: #00f0ff;
+      }
+
+      .team {
+        color: #aaa;
+      }
+
+      /* HERO */
+      .hero {
+        text-align: center;
+        margin-top: 80px;
+        animation: fadeIn 1.5s ease;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        font-family: "Orbitron";
+        background: linear-gradient(90deg, #00f0ff, #00ff88);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .hero p {
+        margin-top: 15px;
+        color: #aaa;
+        font-size: 18px;
+      }
+
+      /* CARDS */
+      .container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 60px;
+        flex-wrap: wrap;
+      }
+
+      .card {
+        width: 260px;
+        padding: 25px;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        transition: 0.4s;
+        animation: float 4s infinite ease-in-out;
+      }
+
+      /* ✨ GLASS SHINE */
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -100%;
+        left: -100%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+          120deg,
+          transparent,
+          rgba(255, 255, 255, 0.25),
+          transparent
+        );
+        transform: rotate(25deg);
+        transition: 0.6s;
+      }
+
+      .card:hover::before {
+        top: 100%;
+        left: 100%;
+      }
+
+      .card:hover {
+        transform: translateY(-12px) scale(1.06);
+        box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+      }
+
+      .card h3 {
+        margin-bottom: 10px;
+      }
+
+      .card p {
+        color: #bbb;
+        font-size: 14px;
+      }
+
+      /* BUTTON */
+      .btn {
+        margin-top: 40px;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        background: linear-gradient(90deg, #00f0ff, #00ff88);
+        color: black;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .btn:hover {
+        transform: scale(1.1);
+      }
+
+      /* ANIMATIONS */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="particles"></canvas>
+
+    <header>
+      <div class="logo">⚡ SENTINEL AI</div>
+      <div class="team">TEAM TITANS</div>
+    </header>
+
+    <div class="hero">
+      <h1>Integrated Multi-Threat Surveillance</h1>
+      <p>
+        Real-time AI system detecting weapons, garbage dumping, and hazards
+        simultaneously
+      </p>
+      <!-- ✅ FIX: Use full backend URL -->
+      <a href="https://your-backend.onrender.com/login">
+        <button class="btn">Launch Dashboard 🚀</button>
+      </a>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <h3>🔫 Weapon Detection</h3>
+        <p>Instantly identifies dangerous objects using AI vision.</p>
+      </div>
+
+      <div class="card">
+        <h3>🗑 Garbage Monitoring</h3>
+        <p>Detects illegal dumping and ensures cleaner environments.</p>
+      </div>
+
+      <div class="card">
+        <h3>🔥 Hazard Alerts</h3>
+        <p>Recognizes fire, smoke, and risky situations in real-time.</p>
+      </div>
+
+      <div class="card">
+        <h3>📊 Unified Dashboard</h3>
+        <p>All threats monitored in one centralized command system.</p>
+      </div>
+    </div>
+
+    <script>
+      // 🌠 PARTICLE SYSTEM
+      const canvas = document.getElementById("particles");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      let particles = [];
+
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 2,
+          dx: Math.random() - 0.5,
+          dy: Math.random() - 0.5,
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = "rgba(0,255,255,0.7)";
+
+        particles.forEach((p) => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fill();
+
+          p.x += p.dx;
+          p.y += p.dy;
+
+          if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+          if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      draw();
+
+      // Resize
+      window.addEventListener("resize", () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      });
+    </script>
+  </body>
+</html>
